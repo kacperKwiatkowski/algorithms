@@ -5,4 +5,9 @@ public class Template {
 
 
     }
+
+    public static int solution(){
+
+        return 0;
+    }
 }
