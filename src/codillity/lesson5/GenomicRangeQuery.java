@@ -27,17 +27,23 @@ public class GenomicRangeQuery {
     }
 
     public static int [] solution(String S, int[] P, int[] Q){
+        //FIXME Apply prefix sum method
+
+        int index;
 
         //The returned result will have length of any given sequence
         int [] result = new int [P.length];
+        String nucleotideSequence;
 
-        for(int index = 0; index < result.length; index++){
+        for(index = 0; index < result.length; index++){
 
-            if(S.substring(P[index], Q[index] + 1).contains("A")){
+            nucleotideSequence = S.substring(P[index], Q[index] + 1);
+
+            if(nucleotideSequence.contains("A")){
                 result[index]=1;
-            } else if (S.substring(P[index], Q[index] + 1).contains("C")){
+            } else if (nucleotideSequence.contains("C")){
                 result[index]=2;
-            }else if (S.substring(P[index], Q[index] + 1).contains("G")){
+            } else if (nucleotideSequence.contains("G")){
                 result[index]=3;
             } else {
                 result[index]=4;
