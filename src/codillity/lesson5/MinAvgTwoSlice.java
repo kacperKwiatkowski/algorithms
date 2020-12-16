@@ -16,28 +16,20 @@ public class MinAvgTwoSlice {
 
     public static int solution(){
         int [] A = new int[]{4, 2, 2, 5, 1, 5, 8};
-
-        double currentMin = A.length;
-        double calculatedSlice = 0;
-        double currentSum = 0;
+        double minAvg = Integer.MAX_VALUE;
         int minPos = 0;
 
-        for(int i = 0; i < A.length; i++){
 
-            currentSum = A[i];
-
-            for(int j = i+1; j < A.length; j++){
-                currentSum += A[j];
-                calculatedSlice = currentSum / (j - i + 1);
-
-                if(currentMin > calculatedSlice){
-                    currentMin = calculatedSlice;
-                    minPos = i;
-                }
-
+        for(int i = 0; i < A.length-1; i++){
+            if((A[i] + A[i+1])/2.0 < minAvg){
+                minPos = i;
+                minAvg = (A[i] + A[i+1])/2.0;
+            }
+            if(i < A.length - 2 && (A[i] + A[i+1] + A[i+2])/3.0 < minAvg){
+                minPos = i;
+                minAvg = (A[i] + A[i+1] + A[i+2])/3.0;
             }
         }
-
         return minPos;
     }
 
