@@ -1,77 +1,43 @@
 package codillity.lesson7;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Stack;
+
 public class Brackets {
     public static void main(String[] args){
 
-        System.out.println(solution("{[()()]}"));
+/*        System.out.println(solution("{[()()]}"));*/
         System.out.println(solution("([)()]"));
-        System.out.println(solution("({{({}[]{})}}[]{})"));
-
-        ({{({}[]{})}}[]{})
+/*        System.out.println(solution("({{({}[]{})}}[]{})"));*/
     }
 
     public static int solution(String S){
 
-        // check if empty
-        if(S.isEmpty()){
-            return 1;
-        }
+        Deque<Character> stack = new ArrayDeque<Character>();
 
-        // check if length is even number
-        if(S.length()%2==1){
-            return 0;
-        }
+        for(int i = 0; i < S.length(); i++) {
+            char c = S.charAt(i);
 
-        char c;
-        boolean hasRoundBracketOccurred = false, hasCurlyBracketOccurred = false, hasSquareBracketOccurred = false;
-
-        for(int i = 0, j = S.length()-1; i<j; i++, j--){
-
-            switch (S.charAt(i)){
-                case '(':
-                    c = ')';
-                    hasRoundBracketOccurred = true;
-                    break;
-                case '{':
-                    c = '}';
-                    hasCurlyBracketOccurred = true;
-                    break;
-                case '[':
-                    c = ']';
-                    hasSquareBracketOccurred = true;
-                    break;
+            switch (c) {
                 case ')':
-                    if(!hasRoundBracketOccurred){
+                    if (stack.isEmpty() || stack.pop() != '(')
                         return 0;
-                    } else {
-                        hasRoundBracketOccurred = false;
-                    }
-                    c = '(';
+                    break;
+                case ']':
+                    if (stack.isEmpty() || stack.pop() != '[')
+                        return 0;
                     break;
                 case '}':
-                    if(!hasCurlyBracketOccurred){
+                    if(stack.isEmpty() || stack.pop() != '{')
                         return 0;
-                    } else {
-                        hasCurlyBracketOccurred = false;
-                    }
-                    c = '{';
                     break;
                 default:
-                    if(!hasSquareBracketOccurred){
-                        return 0;
-                    } else {
-                        hasSquareBracketOccurred = false;
-                    }
-                    c = '[';
+                    stack.push(c);
                     break;
             }
-
-            if(S.charAt(j)!=c){
-                return 0;
-            }
         }
-
-        return 1;
+        return stack.isEmpty() ? 1 : 0;
     }
 
 
