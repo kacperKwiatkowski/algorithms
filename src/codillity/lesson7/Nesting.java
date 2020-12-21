@@ -12,21 +12,21 @@ public class Nesting {
 
     public static int solution(String S){
 
-        Stack<Character> stack = new Stack<>();
+        int bracketsCounter = 0;
 
         for(int i = 0; i < S.length(); i++){
             if(S.charAt(i)=='(') {
-                stack.add('(');
+                bracketsCounter++;
             } else if(S.charAt(i)==')'){
-                if(stack.isEmpty()){
+                if(bracketsCounter==0){
                     return 0;
                 } else {
-                    stack.pop();
+                    bracketsCounter--;
                 }
             }
         }
 
-        if(stack.isEmpty()){
+        if(bracketsCounter==0){
             return 1;
         } else {
             return 0;
