@@ -6,51 +6,32 @@ public class StoneWall {
 
     public static void main(String[] args){
         System.out.println(solution(new int [] {8,8,5,7,9,8,7,4,8}));
-        System.out.println(solution(new int [] {3,3,3}));
+/*        System.out.println(solution(new int [] {3,3,3}));
         System.out.println(solution(new int [] {3,2,1}));
-        System.out.println(solution(new int [] {8,8,5,7,9,8}));
+        System.out.println(solution(new int [] {8,8,5,7,9,8}));*/
     }
 
     public static int solution(int[] H){
 
-        Stack<Integer> stack = new Stack<>();
-        int amountOfBlocks = 0;
-        int currentDesiredHeight = 0;
-
-
-        int i = 0;
-        currentDesiredHeight=H[i];
-        while(i < H.length){
-
-            if (H[i]>currentDesiredHeight){
-                stack.add(H[i]-currentDesiredHeight);
-            } else if (H[i] == currentDesiredHeight) {
-
-                if(!stack.isEmpty()){
-                    amountOfBlocks += solution(stack.stream().mapToInt(j->j).toArray());
-                    stack = new Stack<>();
+        Stack<Integer> stack = new Stack<Integer>();
+        int count = 0;
+        for(int i = 0; i < H.length; i++){
+            if(stack.size() == 0)
+            {
+                count++;
+                stack.push(H[i]);
+            }else{
+                if(stack.peek() > H[i]){
+                    while(stack.size() > 0 && stack.peek() > H[i]){
+                        stack.pop();
+                    }
+                    i--;
+                }else if(stack.peek() < H[i]){
+                    count++;
+                    stack.push(H[i]);
                 }
-
-            } else if (H[i]<currentDesiredHeight){
-                amountOfBlocks++;
-                if(!stack.isEmpty()){
-                    amountOfBlocks += solution(stack.stream().mapToInt(j->j).toArray());
-                    stack = new Stack<>();
-                }
-                currentDesiredHeight=H[i];
             }
-
-            if(i == H.length-1){
-                if(!stack.isEmpty()){
-                    amountOfBlocks += solution(stack.stream().mapToInt(j->j).toArray());
-                    stack = new Stack<>();
-                }
-                amountOfBlocks++;
-            }
-
-            i++;
         }
-
-        return amountOfBlocks;
+        return count;
     }
 }
