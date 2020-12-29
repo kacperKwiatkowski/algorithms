@@ -21,14 +21,14 @@ public class MaxSliceSum {
         int biggestSlice = A[0];
         int slice = 0;
 
-        for (int i = 0; i < A.length; i++){
+        for (int j : A) {
 
-            slice += A[i];
+            slice += j;
 
-            if(slice>biggestSlice) biggestSlice=slice;
+            if (slice > biggestSlice) biggestSlice = slice;
 
-            if(slice < 0){
-                slice=0;
+            if (slice < 0) {
+                slice = 0;
             }
 
         }
