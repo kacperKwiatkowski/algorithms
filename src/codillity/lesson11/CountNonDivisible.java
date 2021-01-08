@@ -1,4 +1,4 @@
-package codillity.Lesson11;
+package codillity.lesson11;
 
 import utils.Printer;
 
