@@ -6,34 +6,30 @@ import java.util.List;
 public class FibFrog {
     public static void main(String[] args){
 
-        int [] A = new int[]{0,0,0,1,1,0,1,0,0,0,0};
-        System.out.println(solution(A));
+        System.out.println(solution(new int[]{0,0,0,1,1,0,1,0,0,0,0}));
+        System.out.println(solution(new int[]{0,0,0,0,0,0,0}));
+        System.out.println(solution(new int[]{1,1,1,1,1,1,1}));
 
     }
 
     public static int solution(int [] A){
 
-        int lengthOfRiver = A.length + 1;
         int numOfJumps = 0;
-
-        boolean isRiverCrossed = false;
-
-        List<Integer> leaves = new LinkedList<>();
-
-        if(isFibNum(lengthOfRiver)) return 1;
-
         int distance = 1;
+        int previousJumpDistance = 0;
+
         for(int i = 0; i<A.length; i++){
             if(A[i]==1){
-                leaves.add(distance);
-                distance=1;
-            } else {
-                distance++;
+                if(isFibNum(distance)){
+                    distance=1;
+                    numOfJumps++;
+                    continue;
+                }
             }
+                distance++;
         }
-        leaves.add(distance);
 
-        if (isRiverCrossed) return numOfJumps;riverCrossed
+        if (isFibNum(distance)) return ++numOfJumps;
         else return -1;
     }
 
